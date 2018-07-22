@@ -13,7 +13,7 @@ const mongoDB = mongoose.connect(dbUri, {
 
 mongoDB.then(async function (db) {
     console.log('Mongodb has been connected ');
-    await fakeDb.seedDB();
+    //await fakeDb.seedDB();
   }).catch(function (err) {
   console.log('Error while trying to connect with mongodb');
   throw err;
