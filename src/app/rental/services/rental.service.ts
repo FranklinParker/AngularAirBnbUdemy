@@ -62,7 +62,7 @@ export class RentalService {
   constructor() {
   }
 
-  public getRentals() {
+  public getRentals(): Observable<Rental[]> {
     const rentalObservabe: Observable<Rental[]> = new Observable(
       (observer) => {
         setTimeout(() => {
@@ -79,7 +79,22 @@ export class RentalService {
   }
 
 
-  getRentalById(rentalId: string): Rental {
-    return this.rentals.find((rental: Rental) => rental.id === rentalId);
+  getRentalById(rentalId: string): Observable<Rental> {
+    const rentalObservabe: Observable<Rental> = new Observable(
+      (observer) => {
+        setTimeout(() => {
+          const rental = this.rentals.find((rental: Rental) => rental.id === rentalId);
+          observer.next(rental);
+        }, 200);
+        setTimeout(() => {
+          observer.error('test error');
+        }, 2000);
+        setTimeout(() => {
+          observer.complete();
+        }, 3000);
+      });
+    return rentalObservabe;
   }
+
+
 }

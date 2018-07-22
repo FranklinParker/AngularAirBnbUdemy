@@ -16,9 +16,16 @@ export class RentalDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params)=>{
       const rentalId = params['rentalId'];
-      this.rental = this.rentalService.getRentalById(rentalId);
+      this.getRental(rentalId);
 
     });
   }
 
+
+  private getRental(rentalId: string){
+    this.rentalService.getRentalById(rentalId)
+      .subscribe((rental:Rental)=>{
+        this.rental = rental;
+      });
+  }
 }
