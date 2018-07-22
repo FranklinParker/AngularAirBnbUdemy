@@ -1,8 +1,10 @@
-<p>{{rental.id}}</p>
-<p>{{rental.category}}</p>
-<p>{{rental.city}}</p>
-<p>{{rental.title}}</p>
-<p>{{rental.description}}</p>
-<p>{{rental.dailyRate|currency:'USD'}}</p>
+<div *ngIf="rental">
+  <p>{{rental.id}}</p>
+  <p>{{rental.category}}</p>
+  <p>{{rental.city}}</p>
+  <p>{{rental.title}}</p>
+  <p>{{rental.description}}</p>
+  <p>{{rental.dailyRate|currency:'USD'}}</p>
+</div>
 
 

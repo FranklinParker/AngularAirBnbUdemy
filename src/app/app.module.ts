@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './common/header/header.component';
 import {Routes, RouterModule} from '@angular/router';
-import {TempComponent} from './temp/temp.component';
 import {RentalModule} from './rental/rental.module';
 
 const routes: Routes = [
@@ -18,8 +17,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    TempComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

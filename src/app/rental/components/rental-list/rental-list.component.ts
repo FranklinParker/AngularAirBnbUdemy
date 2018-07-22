@@ -5,7 +5,7 @@ import {RentalService} from '../../services/rental.service';
 @Component({
   selector: 'bwm-rental-list',
   templateUrl: './rental-list.component.html',
-  styleUrls: ['./rental-list.component.css']
+  styleUrls: ['./rental-list.component.scss']
 })
 export class RentalListComponent implements OnInit {
   rentals: Rental[] = [];
@@ -17,16 +17,13 @@ export class RentalListComponent implements OnInit {
     this.rentalService.getRentals()
       .subscribe(
         (rentals: Rental[]) => {
-          console.log('got rentals');
           this.rentals = rentals;
 
         },
         (err) => {
-          console.log('got err:' + err);
 
         },
         () => {
-          console.log('complete');
         }
       );
   }
