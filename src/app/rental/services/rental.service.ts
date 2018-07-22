@@ -63,7 +63,7 @@ export class RentalService {
        (observer)=>{
          setTimeout(()=>{
            observer.next(this.rentals);
-         },1000);
+         },200);
          setTimeout(()=>{
            observer.error('test error');
          },2000);
