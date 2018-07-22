@@ -18,12 +18,11 @@ export class RentalListComponent implements OnInit {
       .subscribe(
         (rentals: Rental[]) => {
           this.rentals = rentals;
+          console.log('rentals' , rentals)
 
         },
         (err) => {
 
-        },
-        () => {
         }
       );
   }

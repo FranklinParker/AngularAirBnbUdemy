@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const rentalRoutes = require('./routes/rental');
+const cors = require('cors');
 
 const dbUri = require('./config/dev').dbUri;
 const fakeDb = require('./fake-db');
@@ -20,6 +21,7 @@ mongoDB.then(async function (db) {
 });
 
 const app = express();
+app.use(cors());
 
 app.use('/api/v1/rentals',rentalRoutes );
 
