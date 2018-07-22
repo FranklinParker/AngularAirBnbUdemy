@@ -37,6 +37,10 @@ class FakeDB {
       }];
   }
 
+  async seedDB(){
+    await Rental.remove({});
+    this.pushRentalsToDB();
+  }
   pushRentalsToDB() {
     this.rentals.forEach(rental => {
       const rentalSave = new Rental(

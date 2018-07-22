@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const rentalRoutes = require('./routes/rental');
+
 const dbUri = require('./config/dev').dbUri;
 const fakeDb = require('./fake-db');
-
-fakeDb.pushRentalsToDB();
 
 const promiseLib = global.Promise;
 mongoose.Promise = global.Promise;
@@ -11,8 +11,9 @@ const mongoDB = mongoose.connect(dbUri, {
   promiseLibrary: promiseLib // Deprecation issue again
 });
 
-mongoDB.then(function (db) {
+mongoDB.then(async function (db) {
     console.log('Mongodb has been connected ');
+    await fakeDb.seedDB();
   }).catch(function (err) {
   console.log('Error while trying to connect with mongodb');
   throw err;
@@ -20,12 +21,7 @@ mongoDB.then(function (db) {
 
 const app = express();
 
-app.get('/rentals', (req, res)=>{
-  res.json({ success: true});
-
-});
-
-
+app.use('/api/v1/rentals',rentalRoutes );
 
 const PORT = process.env.PORT || 3001;
 
