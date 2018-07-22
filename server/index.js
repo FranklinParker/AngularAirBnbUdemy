@@ -21,7 +21,7 @@ mongoDB.then(async function (db) {
 });
 
 const app = express();
-app.use(cors());
+//app.use(cors());
 
 app.use('/api/v1/rentals',rentalRoutes );
 
