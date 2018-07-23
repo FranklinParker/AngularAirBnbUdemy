@@ -19,6 +19,13 @@ export class MapComponent implements OnInit {
   }
 
   onMapReady() {
+    this.mapService.geocodeLocation(this.location)
+      .subscribe((result) => {
+          console.log('geocode', result);
+        },
+        (err) => {
+          alert(err);
+        });
 
   }
 
