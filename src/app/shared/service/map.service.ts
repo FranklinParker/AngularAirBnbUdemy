@@ -16,7 +16,6 @@ export class MapService {
 
   private cacheLocation(location: string, coordinates: any) {
     this.locationCache[this.camelize(location)] = coordinates;
-    console.log('this.locationCache', + this.locationCache);
 
 
   }
@@ -48,7 +47,6 @@ export class MapService {
   public getGeoLocation(location: string): Observable<any> {
 
      if (this.isLocationCached(location)) {
-       console.log('getting from cache');
       return new Observable<any>(this.locationCache[this.camelize(location)]);
      } else {
       return this.geocodeLocation(location);
