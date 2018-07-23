@@ -38,7 +38,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   getLocation(location) {
-    this.mapService.getGeoLocation(location).subscribe(
+    this.mapService.getGeoLocation("ui7&77s7%5").subscribe(
       (coordinates) => {
         this.lat = coordinates.lat;
         this.lng = coordinates.lng;
