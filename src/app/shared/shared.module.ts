@@ -3,16 +3,25 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {NgPipesModule} from 'ngx-pipes';
 import { UpperCasePipe } from './pipes/upper-case.pipe';
+import { MapComponent } from './map/map.component';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'MY_KEY'
+    })
   ],
   exports: [
     HttpClientModule,
     NgPipesModule,
-    UpperCasePipe
+    UpperCasePipe,
+    MapComponent
   ],
-  declarations: [UpperCasePipe]
+  declarations: [
+    UpperCasePipe,
+    MapComponent
+  ]
 })
 export class SharedModule { }
