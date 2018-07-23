@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {NgPipesModule} from 'ngx-pipes';
+import { UpperCasePipe } from './pipes/upper-case.pipe';
 
 @NgModule({
   imports: [
@@ -9,8 +10,9 @@ import {NgPipesModule} from 'ngx-pipes';
   ],
   exports: [
     HttpClientModule,
-    NgPipesModule
+    NgPipesModule,
+    UpperCasePipe
   ],
-  declarations: []
+  declarations: [UpperCasePipe]
 })
 export class SharedModule { }
