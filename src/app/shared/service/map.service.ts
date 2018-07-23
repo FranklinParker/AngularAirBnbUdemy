@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CamelizePipe } from 'ngx-pipes';
 
 @Injectable()
@@ -16,9 +16,13 @@ export class MapService {
 
   private cacheLocation(location: string, coordinates: any) {
     this.locationCache[this.camelize(location)] = coordinates;
+    console.log('this.locationCache', + this.locationCache);
+
+
   }
 
   private isLocationCached(location): boolean {
+    console.log('this.locationCache', + this.locationCache);
     return this.locationCache[this.camelize(location)];
   }
 
@@ -43,10 +47,11 @@ export class MapService {
 
   public getGeoLocation(location: string): Observable<any> {
 
-    // if (this.isLocationCached(location)) {
-    //   return Observable.of(this.locationCache[this.camelize(location)]);
-    // } else {
+     if (this.isLocationCached(location)) {
+       console.log('getting from cache');
+      return new Observable<any>(this.locationCache[this.camelize(location)]);
+     } else {
       return this.geocodeLocation(location);
-   // }
+    }
   }
 }
