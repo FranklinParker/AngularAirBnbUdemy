@@ -22,8 +22,6 @@ export class RentalListComponent implements OnInit {
         },
         (err) => {
 
-        },
-        () => {
         }
       );
   }

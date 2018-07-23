@@ -5,6 +5,7 @@ import { RentalListComponent } from './components/rental-list/rental-list.compon
 import { RentalListItemComponent } from './components/rental-list-item/rental-list-item.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
 import {RouterModule, Routes} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   declarations: [
     RentalComponent,
