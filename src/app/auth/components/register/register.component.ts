@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import {Register} from '../../models/register';
 
 @Component({
   selector: 'bwm-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  email: string;
-  password: string;
-  username: string;
-  passwordConfirmation: string;
+  regFormData: Register = {
+    username: undefined,
+    email: undefined,
+    password: undefined,
+    passwordConfirmation: undefined
+
+  };
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onRegister(){
-    alert(this.email);
+    alert(this.regFormData);
   }
 
 }
