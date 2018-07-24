@@ -5,13 +5,25 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './common/header/header.component';
 import {Routes, RouterModule} from '@angular/router';
 import {RentalModule} from './rental/rental.module';
+import {AuthModule} from './auth/auth.module';
+import {LoginComponent} from './auth/components/login/login.component';
+import {RegisterComponent} from './auth/components/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/rentals',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+
 ];
 
 @NgModule({
@@ -22,7 +34,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    RentalModule
+    RentalModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
