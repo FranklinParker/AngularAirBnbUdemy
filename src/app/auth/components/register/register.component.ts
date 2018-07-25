@@ -31,10 +31,10 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(this.regFormData)
       .subscribe(() => {
           this.router.navigate(['/login',
-            {registration: 'Success'}]);
+            {registered: 'Success' , email: this.regFormData.email,
+             password: this.regFormData.password}]);
         },
         (err) => {
-          console.log('err', err);
           this.errors = err.error.errors;
         });
   }

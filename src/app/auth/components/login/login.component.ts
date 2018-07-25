@@ -23,9 +23,20 @@ export class LoginComponent implements OnInit {
     this.initForm();
 
     this.route.params.subscribe((params) => {
-      if (params['registered'] === 'success') {
+      console.log('params', params);
+      if (params['registered'] === 'Success') {
         this.notifyMessage = 'You have been succesfuly registered, you can login now!';
       }
+      if(params['email'] && params['password']){
+        this.loginForm.get('email').patchValue(params['email']);
+        this.loginForm.get('password').patchValue(params['password']);
+      }else{
+        this.loginForm.get('email').patchValue('');
+        this.loginForm.get('password').patchValue('');
+      }
+
+
+
     })
   }
 
