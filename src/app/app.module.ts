@@ -9,6 +9,8 @@ import {AuthModule} from './auth/auth.module';
 import {LoginComponent} from './auth/components/login/login.component';
 import {RegisterComponent} from './auth/components/register/register.component';
 import {AuthGuard} from './auth/service/auth.guard';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from './shared/service/token.interceptor';
 
 const routes: Routes = [
   {
@@ -31,7 +33,12 @@ const routes: Routes = [
     AuthModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

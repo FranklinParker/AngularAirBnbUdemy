@@ -65,4 +65,7 @@ export class AuthService {
     return this.decodedToken.username;
   }
 
+  public getToken(): string{
+    return localStorage.getItem('bwm_auth');
+  }
 }
