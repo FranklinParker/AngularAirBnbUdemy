@@ -6,6 +6,7 @@ import { UpperCasePipe } from './pipes/upper-case.pipe';
 import { MapComponent } from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {MapService} from './service/map.service';
+import {Daterangepicker} from 'ng2-daterangepicker';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {MapService} from './service/map.service';
     HttpClientModule,
     NgPipesModule,
     UpperCasePipe,
-    MapComponent
+    MapComponent,
+    Daterangepicker
   ],
   declarations: [
     UpperCasePipe,

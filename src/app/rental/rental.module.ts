@@ -7,6 +7,7 @@ import { RentalDetailComponent } from './components/rental-detail/rental-detail.
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from '../auth/service/auth.guard';
+import { RentalBookingComponent } from './components/rental-detail/rental-booking/rental-booking.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
     RentalComponent,
     RentalListComponent,
     RentalListItemComponent,
-    RentalDetailComponent
+    RentalDetailComponent,
+    RentalBookingComponent
   ],
   exports: [
     RentalComponent

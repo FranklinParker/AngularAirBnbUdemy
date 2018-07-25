@@ -11,6 +11,7 @@ import {RegisterComponent} from './auth/components/register/register.component';
 import {AuthGuard} from './auth/service/auth.guard';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './shared/service/token.interceptor';
+import {Daterangepicker} from 'ng2-daterangepicker';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     RentalModule,
-    AuthModule
+    AuthModule,
+    Daterangepicker
   ],
   providers: [
     AuthGuard,
