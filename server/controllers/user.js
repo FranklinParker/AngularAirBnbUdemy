@@ -6,6 +6,7 @@ const config = require('../config');
 
 module.exports.register =  (req, res)=>{
   const { username, email, password, passwordConfirmation } = req.body;
+  console.log('reg', req.body);
 
   if (!password || !email) {
     return res.status(422).send({errors: [{title: 'Data missing!', detail: 'Provide email and password!'}]});

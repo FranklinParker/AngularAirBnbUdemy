@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Register} from '../../models/register';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../../service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'bwm-register',
@@ -15,13 +18,25 @@ export class RegisterComponent implements OnInit {
 
   };
 
-  constructor() { }
+  errors: any;
+
+  constructor(private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  onRegister(){
-    alert(this.regFormData);
+  onRegister(registerForm: NgForm) {
+    this.authService.registerUser(this.regFormData)
+      .subscribe(() => {
+          this.router.navigate(['/login',
+            {registration: 'Success'}]);
+        },
+        (err) => {
+          console.log('err', err);
+          this.errors = err.error.errors;
+        });
   }
 
 }
