@@ -3,14 +3,35 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Register} from '../models/register';
 import {map} from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import * as moment from 'moment';
+
+
+class DecodedToken {
+  exp: number = 0;
+  username: string = '';
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private url = environment.apiUrl + 'users';
+  private decodedToken;
+  private jwtHelper = new JwtHelperService();
+
 
   constructor(private http: HttpClient) {
+    this.decodedToken = JSON.parse(localStorage.getItem('bwm_meta')) || new DecodedToken();
+
+  }
+
+  public isAuthenticated(): boolean {
+    return moment().isBefore(this.getExpiration());
+  }
+
+  private getExpiration() {
+    return moment.unix(this.decodedToken.exp);
   }
 
   public registerUser(register: Register) {
@@ -26,8 +47,16 @@ export class AuthService {
   }
 
   private saveToken(token: string) {
-     localStorage.setItem('bwm_auth', token)
-     return token;
+    this.decodedToken = this.jwtHelper.decodeToken(token);
+
+    localStorage.setItem('bwm_meta', JSON.stringify(this.decodedToken));
+    localStorage.setItem('bwm_auth', token);
+    return token;
+  }
+
+  public logout(){
+    this.decodedToken = new DecodedToken();
+    localStorage.clear();
   }
 
 
