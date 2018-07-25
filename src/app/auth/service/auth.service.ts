@@ -56,8 +56,13 @@ export class AuthService {
 
   public logout(){
     this.decodedToken = new DecodedToken();
-    localStorage.clear();
+    localStorage.removeItem('bwm_meta');
+    localStorage.removeItem('bwm_auth');
+
   }
 
+  public  getUsername(): string{
+    return this.decodedToken.username;
+  }
 
 }

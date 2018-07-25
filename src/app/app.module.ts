@@ -8,6 +8,7 @@ import {RentalModule} from './rental/rental.module';
 import {AuthModule} from './auth/auth.module';
 import {LoginComponent} from './auth/components/login/login.component';
 import {RegisterComponent} from './auth/components/register/register.component';
+import {AuthGuard} from './auth/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,9 @@ const routes: Routes = [
     RentalModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

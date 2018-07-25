@@ -6,6 +6,7 @@ import { RentalListItemComponent } from './components/rental-list-item/rental-li
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
+import {AuthGuard} from '../auth/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,11 +15,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: RentalListComponent
+        component: RentalListComponent,
       },
       {
         path: ':rentalId',
-        component: RentalDetailComponent
+        component: RentalDetailComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }
@@ -37,6 +39,8 @@ const routes: Routes = [
   ],
   exports: [
     RentalComponent
-  ]
+  ],
+
+
 })
 export class RentalModule { }
