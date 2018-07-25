@@ -48,12 +48,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.auth.login(this.loginForm.value).subscribe(
-    //   (token) => {
-    //     this.router.navigate(['/rentals']);
-    //   },
-    //   (errorResponse) => {
-    //     this.errors = errorResponse.error.errors;
-    //   })
+    const { email, password} = this.loginForm.value;
+    this.auth.login(email,password)
+      .subscribe((token:string)=>{
+
+        this.router.navigate(
+          ['/rentals',{message: 'Logged in'}]);
+      },
+        err=>{
+            this.errors = err.error.errors;
+        })
   }
 }
