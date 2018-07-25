@@ -26,9 +26,25 @@
   color: $main-color;
 }
 
+.btn-bwm-logout {
+  border-color: green;
+  color: $main-text-color;
+  background-color: lightgray;
+}
+
 .hover, .focus, .active {
   background-color: transparent;
   border-color: $main-color !important;
   color: blue !important;
   box-shadow: none;
+}
+
+
+.user-name{
+  color: blue;
+  font-weight: bold;
+}
+
+.clickable{
+  cursor: pointer;
 }
