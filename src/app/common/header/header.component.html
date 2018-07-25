@@ -11,11 +11,11 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <ng-container *ngIf="auth.isAuthenticated()">
-        <li class="nav-item">
+        <li class="nav-item clickable">
           <a class="nav-link">{{auth.getUsername()}}</a>
         </li>
         <li class="nav-item" *ngIf="auth.isAuthenticated()">
-          <button class="btn btn-outline-success my-2 my-sm-0 btn-bwm-logout"
+          <button class="btn btn-outline-success my-2 my-sm-0 btn-bwm-logout clickable"
                   (click)="logout()"
                   type="button">Logout
           </button>
