@@ -1,38 +1,59 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'bwm-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
-  message: string;
 
-  loginForm: FormGroup = new FormGroup({});
+  loginForm: FormGroup;
+  errors: any[] = [];
+  notifyMessage: string = '';
 
-  constructor(private route: ActivatedRoute,
-              private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder,
+              private auth: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.initForm();
+
     this.route.params.subscribe((params) => {
-      console.log('params', params);
-      this.message = params['registration'];
-    });
+      if (params['registered'] === 'success') {
+        this.notifyMessage = 'You have been succesfuly registered, you can login now!';
+      }
+    })
+  }
 
+  initForm() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-
-    });
+      email: ['', [Validators.required,
+        Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
+      password: ['', Validators.required]
+    })
   }
 
-  onLogin() {
-    console.log(this.loginForm.value);
+  isInvalidForm(fieldName): boolean {
+    return this.loginForm.controls[fieldName].invalid &&
+      (this.loginForm.controls[fieldName].dirty || this.loginForm.controls[fieldName].touched)
   }
 
+
+  isRequired(fieldName): boolean {
+    return this.loginForm.controls[fieldName].errors.required
+  }
+
+  login() {
+    // this.auth.login(this.loginForm.value).subscribe(
+    //   (token) => {
+    //     this.router.navigate(['/rentals']);
+    //   },
+    //   (errorResponse) => {
+    //     this.errors = errorResponse.error.errors;
+    //   })
+  }
 }
