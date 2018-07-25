@@ -26,6 +26,7 @@ export class RentalBookingComponent implements OnInit {
   public options: any = {
     locale: {format: 'YYYY-MM-DD'},
     alwaysShowCalendars: false,
+    opens: 'left'
   };
 
   public selectedDate(value: any, datepicker?: any) {
