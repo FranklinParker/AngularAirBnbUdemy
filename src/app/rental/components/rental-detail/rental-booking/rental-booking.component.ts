@@ -12,8 +12,8 @@ import * as moment from 'moment';
 })
 
 export class RentalBookingComponent implements OnInit {
-  @Input() price: number;
-  @Input() bookings: Booking[];
+  @Input() rental: Rental;
+
   bookedOutDates: any[] = [];
   public daterange: any = {};
   public options: any = {
@@ -24,6 +24,8 @@ export class RentalBookingComponent implements OnInit {
   };
   @ViewChild(DaterangePickerComponent)
   private picker: DaterangePickerComponent;
+  newBooking: Booking = new Booking();
+
 
   constructor(private helperService: HelperService) {
   }
@@ -33,13 +35,14 @@ export class RentalBookingComponent implements OnInit {
   }
 
   private checkForInvalidDate(date){
-    return this.bookedOutDates.includes(date.format(Booking.DATE_FORMAT))
+    return this.bookedOutDates.includes(this.helperService.formatBookingDate(date))
        || date.diff(moment(), 'days')<0;
 
   }
   private getBookedOutDates(){
-    if(this.bookings){
-      this.bookings.forEach((booking: Booking)=>{
+    const bookings = this.rental.bookings;
+    if(bookings){
+      bookings.forEach((booking: Booking)=>{
         const  tmpDates =
           this.helperService.getBookingRangeOfDates(booking.startAt,
             booking.endAt);
@@ -53,9 +56,13 @@ export class RentalBookingComponent implements OnInit {
 
   public selectedDate(value: any, datepicker?: any) {
 
-    datepicker.start = value.start;
-    datepicker.end = value.end;
 
+    this.newBooking.endAt =
+      this.helperService.formatBookingDate(value.end);
+    this.newBooking.startAt =
+      this.helperService.formatBookingDate(value.start);
+    this.newBooking.days = -(value.start.diff(value.end, 'days'));
+    console.log(this.newBooking);
     this.daterange.start = value.start;
     this.daterange.end = value.end;
     this.daterange.label = value.label;
