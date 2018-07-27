@@ -7,6 +7,7 @@ import { MapComponent } from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {MapService} from './service/map.service';
 import {Daterangepicker} from 'ng2-daterangepicker';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {Daterangepicker} from 'ng2-daterangepicker';
     NgPipesModule,
     UpperCasePipe,
     MapComponent,
-    Daterangepicker
+    Daterangepicker,
+    FormsModule
   ],
   declarations: [
     UpperCasePipe,
