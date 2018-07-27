@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, ViewContainerRef} from '@angular/core';
 import {Rental} from '../../../models/rental';
 import {DaterangePickerComponent} from 'ng2-daterangepicker';
 import {Booking} from '../../../../bookings/booking.model';
@@ -6,6 +6,8 @@ import {HelperService} from '../../../../common/service/helper.service';
 import * as moment from 'moment';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {BookingService} from '../../../services/booking.service';
+import {ToastrService} from 'ngx-toastr';
+
 
 @Component({
   selector: 'bwm-rental-booking',
@@ -31,7 +33,8 @@ export class RentalBookingComponent implements OnInit {
 
   constructor(private helperService: HelperService,
               private bookingService: BookingService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private toastrServ: ToastrService) {
   }
 
   ngOnInit() {
@@ -60,6 +63,8 @@ export class RentalBookingComponent implements OnInit {
           this.addNewBookingDates(bookingData);
           this.newBooking = new Booking();
           this.modalRef.close();
+          this.toastrServ
+            .success('Booking was successfully created', 'Success');
         },
         err => {
           this.errors = err.error.errors;
