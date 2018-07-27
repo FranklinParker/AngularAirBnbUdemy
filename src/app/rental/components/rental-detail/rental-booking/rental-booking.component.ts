@@ -72,6 +72,9 @@ export class RentalBookingComponent implements OnInit {
 
   }
 
+  createBooking(){
+    console.log(this.newBooking);
+  }
   confirm(msg){
 
   }
