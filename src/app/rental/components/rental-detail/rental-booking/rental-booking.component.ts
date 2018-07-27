@@ -39,6 +39,7 @@ export class RentalBookingComponent implements OnInit {
   }
 
   openRentalConfirmModal(content) {
+    this.errors = [];
     this.modalRef = this.modalService.open(content);
   }
 
