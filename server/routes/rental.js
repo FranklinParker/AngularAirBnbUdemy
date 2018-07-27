@@ -8,14 +8,6 @@ router.get('/secret', userCtl.authMiddleware, (req, res) => {
   res.json({'secret': true});
 });
 
-router.get('', (req, res) => {
-  Rental.find({})
-    .select('-bookings')
-    .exec(function (err, foundRentals) {
-      res.json(foundRentals);
-    });
-
-});
 
 router.get('/:id', (req, res) => {
   const rentalId = req.params.id;
@@ -33,5 +25,28 @@ router.get('/:id', (req, res) => {
     });
 
 });
+
+
+router.get('', (req, res) => {
+  const city = req.query.city;
+  const query = city ? {city: city.toLowerCase()} : {};
+
+  Rental.find(query)
+    .select('-bookings')
+    .exec(function(err, foundRentals) {
+
+      if (err) {
+        return res.status(422).send({errors: normalizeErrors(err.errors)});
+      }
+
+      if (city && foundRentals.length === 0) {
+        return res.status(422).send({errors: [{title: 'No Rentals Found!', detail: `There are no rentals for city ${city}`}]});
+      }
+
+      return res.json(foundRentals);
+    });
+
+});
+
 
 module.exports = router;
