@@ -9,12 +9,14 @@ const {normalizeErrors} = require('../helpers/mongoose');
 module.exports.createBooking =  (req, res)=>{
   const { startAt, endAt, totalPrice, guests, days, rental } = req.body;
   const user = res.locals.user;
+  console.log('rental', rental);
 
   const booking = new Booking({ startAt, endAt, totalPrice, guests, days});
   Rental.findById(rental._id)
     .populate('bookings')
     .populate('user')
     .exec(function(err, foundRental) {
+      console.log('found rental', foundRental);
 
       if (err) {
         return res.status(422).send({errors: normalizeErrors(err.errors)});

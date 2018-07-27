@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Rental} from '../../models/rental';
 
 @Component({
@@ -8,7 +8,9 @@ import {Rental} from '../../models/rental';
 })
 export class RentalListItemComponent implements OnInit {
   @Input() rental: Rental;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

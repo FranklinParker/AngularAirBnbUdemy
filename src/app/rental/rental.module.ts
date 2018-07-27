@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RentalComponent } from './rental.component';
-import { RentalListComponent } from './components/rental-list/rental-list.component';
-import { RentalListItemComponent } from './components/rental-list-item/rental-list-item.component';
-import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RentalComponent} from './rental.component';
+import {RentalListComponent} from './components/rental-list/rental-list.component';
+import {RentalListItemComponent} from './components/rental-list-item/rental-list-item.component';
+import {RentalDetailComponent} from './components/rental-detail/rental-detail.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from '../auth/service/auth.guard';
-import { RentalBookingComponent } from './components/rental-detail/rental-booking/rental-booking.component';
+import {RentalBookingComponent} from './components/rental-detail/rental-booking/rental-booking.component';
 
 const routes: Routes = [
   {
@@ -26,6 +26,7 @@ const routes: Routes = [
     ]
   }
 ];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -45,4 +46,5 @@ const routes: Routes = [
 
 
 })
-export class RentalModule { }
+export class RentalModule {
+}

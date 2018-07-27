@@ -8,7 +8,8 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class RentalService {
-  getUrl = environment.apiUrl + 'rentals'
+  getUrl = environment.apiUrl + 'rentals';
+
   constructor(private http: HttpClient) {
   }
 
@@ -19,9 +20,8 @@ export class RentalService {
   }
 
 
-
   getRentalById(rentalId: string): Observable<Rental> {
-    return this.http.get<Rental>(this.getUrl +'/' + rentalId);
+    return this.http.get<Rental>(this.getUrl + '/' + rentalId);
   }
 
 
