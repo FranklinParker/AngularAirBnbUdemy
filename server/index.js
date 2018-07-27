@@ -8,7 +8,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const {DB_URI} = require('./config');
-const fakeDb = require('./fake-db');
+const fakeDbImp = require('./fake-db');
+const fakeDb = new fakeDbImp();
 
 const promiseLib = global.Promise;
 mongoose.Promise = global.Promise;
@@ -18,7 +19,7 @@ const mongoDB = mongoose.connect(DB_URI, {
 
 mongoDB.then(async function (db) {
   console.log('Mongodb has been connected ');
-//  await fakeDb.seedDb();
+  //await fakeDb.seedDb();
 }).catch(function (err) {
   console.log('Error while trying to connect with mongodb');
   throw err;
