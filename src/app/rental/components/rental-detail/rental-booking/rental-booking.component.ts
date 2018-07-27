@@ -1,10 +1,11 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {Rental} from '../../../models/rental';
-import {Daterangepicker, DaterangePickerComponent} from 'ng2-daterangepicker';
+import {DaterangePickerComponent} from 'ng2-daterangepicker';
 import {Booking} from '../../../../bookings/booking.model';
 import {HelperService} from '../../../../common/service/helper.service';
 import * as moment from 'moment';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {BookingService} from '../../../services/booking.service';
 
 @Component({
   selector: 'bwm-rental-booking',
@@ -14,7 +15,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 export class RentalBookingComponent implements OnInit {
   @Input() rental: Rental;
-
+  modalRef: NgbModalRef;
   errors: any[] = [];
   bookedOutDates: any[] = [];
   public daterange: any = {};
@@ -29,6 +30,7 @@ export class RentalBookingComponent implements OnInit {
   private picker: DaterangePickerComponent;
 
   constructor(private helperService: HelperService,
+              private bookingService: BookingService,
               private modalService: NgbModal) {
   }
 
@@ -37,18 +39,33 @@ export class RentalBookingComponent implements OnInit {
   }
 
   openRentalConfirmModal(content) {
-    this.modalService.open(content);
+    this.modalRef = this.modalService.open(content);
   }
 
   public selectedDate(value: any, datepicker?: any) {
-
-
     this.newBooking.endAt =
       this.helperService.formatBookingDate(value.end);
     this.newBooking.startAt =
       this.helperService.formatBookingDate(value.start);
     this.newBooking.days = -(value.start.diff(value.end, 'days'));
     this.newBooking.totalPrice = this.rental.dailyRate * this.newBooking.days;
+
+  }
+
+  createBooking() {
+    this.newBooking.rental = this.rental;
+    this.bookingService.createBooking(this.newBooking)
+      .subscribe((bookingData) => {
+          this.addNewBookingDates(bookingData);
+          this.newBooking = new Booking();
+          this.modalRef.close();
+        },
+        err => {
+          this.errors = err.error.errors;
+        });
+  }
+
+  confirm(msg) {
 
   }
 
@@ -72,10 +89,11 @@ export class RentalBookingComponent implements OnInit {
 
   }
 
-  createBooking(){
-    console.log(this.newBooking);
-  }
-  confirm(msg){
+  private addNewBookingDates(bookingData: any) {
+    const tmpDates =
+      this.helperService.getBookingRangeOfDates(bookingData.startAt,
+        bookingData.endAt);
+    this.bookedOutDates.push(...tmpDates);
 
   }
 }
