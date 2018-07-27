@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Rental} from '../../../models/rental';
 import {DaterangePickerComponent} from 'ng2-daterangepicker';
 import {Booking} from '../../../../bookings/booking.model';
@@ -12,7 +12,8 @@ import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'bwm-rental-booking',
   templateUrl: './rental-booking.component.html',
-  styleUrls: ['./rental-booking.component.scss']
+  styleUrls: ['./rental-booking.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class RentalBookingComponent implements OnInit {
@@ -25,6 +26,7 @@ export class RentalBookingComponent implements OnInit {
     locale: {format: Booking.DATE_FORMAT},
     alwaysShowCalendars: false,
     opens: 'left',
+    autoUpdateInput: false,
     isInvalidDate: this.checkForInvalidDate.bind(this)
   };
   newBooking: Booking = new Booking();
@@ -41,12 +43,20 @@ export class RentalBookingComponent implements OnInit {
     this.getBookedOutDates();
   }
 
+  private resetDatePicker(){
+    this.picker.datePicker.setStartDate(moment());
+    this.picker.datePicker.setEndDate(moment());
+    this.picker.datePicker.element.val('');
+
+  }
+
   openRentalConfirmModal(content) {
     this.errors = [];
     this.modalRef = this.modalService.open(content);
   }
 
   public selectedDate(value: any, datepicker?: any) {
+    this.options.autoUpdateInput = true;
     this.newBooking.endAt =
       this.helperService.formatBookingDate(value.end);
     this.newBooking.startAt =
@@ -63,6 +73,7 @@ export class RentalBookingComponent implements OnInit {
           this.addNewBookingDates(bookingData);
           this.newBooking = new Booking();
           this.modalRef.close();
+          this.resetDatePicker();
           this.toastrServ
             .success('Booking was successfully created', 'Success');
         },
