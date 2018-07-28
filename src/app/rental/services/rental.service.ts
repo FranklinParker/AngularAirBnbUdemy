@@ -13,8 +13,13 @@ export class RentalService {
   constructor(private http: HttpClient) {
   }
 
-  public getRentals(): Observable<Rental[]> {
-    return this.http.get<Rental[]>(this.getUrl);
+  public getRentals(city?: string): Observable<Rental[]> {
+    const url = (city && city.length > 0)
+      ? this.getUrl + '?city=' + city
+      : this.getUrl;
+
+    if(city)
+    return this.http.get<Rental[]>(url);
 
 
   }

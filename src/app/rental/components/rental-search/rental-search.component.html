@@ -5,3 +5,8 @@
     <bwm-rental-list-item [rental]="rental"></bwm-rental-list-item>
   </div>
 </div>
+<div *ngIf="errors.length > 0" class="alert alert-danger modal-error">
+  <p *ngFor="let error of errors">
+    {{error.detail}}
+  </p>
+</div>
