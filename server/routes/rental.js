@@ -29,8 +29,7 @@ router.get('/:id', (req, res) => {
 
 router.get('', (req, res) => {
   const city = req.query.city;
-  const query = city ? {city: city.toLowerCase()} : {};
-
+  const query = city ? {city : new RegExp(city, 'i')} : {};
   Rental.find(query)
     .select('-bookings')
     .exec(function(err, foundRentals) {
@@ -45,6 +44,25 @@ router.get('', (req, res) => {
 
       return res.json(foundRentals);
     });
+
+});
+
+
+
+router.post('',  userCtl.authMiddleware, (req, res) => {
+  const rentalData = req.body;
+  rentalData.user =  res.locals.user;
+  rentalData.bookings  = [];
+  console.log('rentalData', rentalData);
+  const rental = new Rental(
+    rentalData
+  );
+  rental.save(function(err, rental) {
+    if (err) {
+      return res.status(422).send({errors: normalizeErrors(err.errors)});
+    }
+    return res.json(rental);
+  });
 
 });
 
