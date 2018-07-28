@@ -13,6 +13,7 @@ import {Daterangepicker} from 'ng2-daterangepicker';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     RentalModule,
     AuthModule,
+    FormsModule,
     Daterangepicker,
     NgbModule.forRoot(),
     BrowserAnimationsModule,

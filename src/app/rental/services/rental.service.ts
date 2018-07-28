@@ -8,21 +8,30 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class RentalService {
-  getUrl = environment.apiUrl + 'rentals';
+  rentalUrl = environment.apiUrl + 'rentals';
 
   constructor(private http: HttpClient) {
   }
 
-  public getRentals(): Observable<Rental[]> {
-    return this.http.get<Rental[]>(this.getUrl);
+  public getRentals(city?: string): Observable<Rental[]> {
+    return this.http.get<Rental[]>(this.rentalUrl);
 
 
   }
 
 
-  getRentalById(rentalId: string): Observable<Rental> {
-    return this.http.get<Rental>(this.getUrl + '/' + rentalId);
+  public getRentalsByCity(city: string){
+    const url = this.rentalUrl + '?city=' + city;
+    return this.http.get<Rental[]>(url);
   }
 
+  public getRentalById(rentalId: string): Observable<Rental> {
+    return this.http.get<Rental>(this.rentalUrl + '/' + rentalId);
+  }
+
+
+  public createRental(rental: Rental) : Observable<any>{
+    return this.http.post(this.rentalUrl, rental);
+  }
 
 }

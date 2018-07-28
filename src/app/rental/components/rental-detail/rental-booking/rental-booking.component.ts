@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {BookingService} from '../../../services/booking.service';
 import {ToastrService} from 'ngx-toastr';
+import {AuthService} from '../../../../auth/service/auth.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class RentalBookingComponent implements OnInit {
   constructor(private helperService: HelperService,
               private bookingService: BookingService,
               private modalService: NgbModal,
-              private toastrServ: ToastrService) {
+              private toastrServ: ToastrService,
+              public auth: AuthService) {
   }
 
   ngOnInit() {

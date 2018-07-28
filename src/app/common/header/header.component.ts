@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  searchCity: string ='boston';
   constructor(public auth: AuthService,
               private router: Router) { }
 
@@ -18,5 +18,9 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.auth.logout();
     this.router.navigate(['/login'])
+  }
+  onSearch(){
+    this.searchCity? this.router.navigate([`/rentals/${this.searchCity}/homes`])
+      : this.router.navigate(['rentals']);
   }
 }

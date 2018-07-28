@@ -21,6 +21,20 @@
   padding: 20px;
   border: 1px solid $light-gray-color;
 
+  .should-login {
+    text-align: center;
+    font-size: 12pt;
+    margin-bottom: 10px;
+
+    .btn-bwm {
+      padding: 15px;
+
+      &:focus, &:hover {
+        color: white;
+      }
+    }
+  }
+
   .btn-confirm {
     background-color: #FF5A5F;
     font-size: 17px;
@@ -29,7 +43,7 @@
   }
 
   label {
-    font-size: 12px;
+    font-size:12px;
     font-weight: 300;
     margin-bottom: 0;
   }
@@ -55,6 +69,7 @@
   }
 }
 
+// MODAL
 
 .title {
   font-weight: 700;
