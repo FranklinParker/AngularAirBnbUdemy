@@ -12,6 +12,22 @@ router.get('/secret', userCtl.authMiddleware, (req, res) => {
 });
 
 
+router.get('/manage',  userCtl.authMiddleware, function(req, res) {
+  const user = res.locals.user;
+
+  Rental
+    .where({user})
+    .populate('bookings')
+    .exec(function(err, foundRentals) {
+
+      if (err) {
+        return res.status(422).send({errors: normalizeErrors(err.errors)});
+      }
+
+      return res.json(foundRentals);
+    });
+});
+
 router.get('/:id', (req, res) => {
   const rentalId = req.params.id;
 
@@ -75,7 +91,9 @@ router.post('', userCtl.authMiddleware, function (req, res) {
   });
 });
 
-router.delete('/:id', userCtl.authMiddleware, function(req, res) {
+
+
+router.delete('/:id', userCtl.authMiddleware, function (req, res) {
   const user = res.locals.user;
 
   Rental
@@ -84,9 +102,9 @@ router.delete('/:id', userCtl.authMiddleware, function(req, res) {
     .populate({
       path: 'bookings',
       select: 'startAt',
-      match: { startAt: { $gt: new Date()}}
+      match: {startAt: {$gt: new Date()}}
     })
-    .exec(function(err, foundRental) {
+    .exec(function (err, foundRental) {
 
       if (err) {
         return res.status(422).send({errors: normalizeErrors(err.errors)});
@@ -97,10 +115,15 @@ router.delete('/:id', userCtl.authMiddleware, function(req, res) {
       }
 
       if (foundRental.bookings.length > 0) {
-        return res.status(422).send({errors: [{title: 'Active Bookings!', detail: 'Cannot delete rental with active bookings!'}]});
+        return res.status(422).send({
+          errors: [{
+            title: 'Active Bookings!',
+            detail: 'Cannot delete rental with active bookings!'
+          }]
+        });
       }
 
-      foundRental.remove(function(err) {
+      foundRental.remove(function (err) {
         if (err) {
           return res.status(422).send({errors: normalizeErrors(err.errors)});
         }
