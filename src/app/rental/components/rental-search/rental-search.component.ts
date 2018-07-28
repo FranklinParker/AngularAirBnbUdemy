@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 export class RentalSearchComponent implements OnInit {
   rentals: Rental[] = [];
   errors: any[]= [];
+  city: string;
 
   constructor(private rentalService: RentalService,
               private route: ActivatedRoute) {
@@ -18,18 +19,23 @@ export class RentalSearchComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const city = params.city;
-      this.rentalService.getRentals(city)
-        .subscribe(
-          (rentals: Rental[]) => {
-            this.rentals = rentals;
-
-          },
-          (err) => {
-              this.errors = err.error.errors;
-          }
-        );
+      this.city = params.city;
+      this.getRentals();
     });
+
+  }
+
+  private getRentals(){
+    this.rentalService.getRentalsByCity(this.city)
+      .subscribe(
+        (rentals: Rental[]) => {
+          this.rentals = rentals;
+
+        },
+        (err) => {
+          this.errors = err.error.errors;
+        }
+      );
 
   }
 

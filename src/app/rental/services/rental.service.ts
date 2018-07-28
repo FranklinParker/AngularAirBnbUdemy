@@ -14,18 +14,18 @@ export class RentalService {
   }
 
   public getRentals(city?: string): Observable<Rental[]> {
-    const url = (city && city.length > 0)
-      ? this.getUrl + '?city=' + city
-      : this.getUrl;
-
-    if(city)
-    return this.http.get<Rental[]>(url);
+    return this.http.get<Rental[]>(this.getUrl);
 
 
   }
 
 
-  getRentalById(rentalId: string): Observable<Rental> {
+  public getRentalsByCity(city: string){
+    const url = this.getUrl + '?city=' + city;
+    return this.http.get<Rental[]>(url);
+  }
+
+  public getRentalById(rentalId: string): Observable<Rental> {
     return this.http.get<Rental>(this.getUrl + '/' + rentalId);
   }
 
