@@ -20,7 +20,7 @@ export class RentalSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     this.route.params.subscribe((params) => {
       this.city = params.city;
       this.getRentals();

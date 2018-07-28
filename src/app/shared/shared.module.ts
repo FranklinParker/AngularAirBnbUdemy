@@ -8,6 +8,7 @@ import {AgmCoreModule} from '@agm/core';
 import {MapService} from './service/map.service';
 import {Daterangepicker} from 'ng2-daterangepicker';
 import {FormsModule} from '@angular/forms';
+import {ImageUploadComponent} from '../common/components/image-upload/image-upload.component';
 
 @NgModule({
   imports: [
@@ -23,11 +24,13 @@ import {FormsModule} from '@angular/forms';
     UpperCasePipe,
     MapComponent,
     Daterangepicker,
-    FormsModule
+    FormsModule,
+    ImageUploadComponent
   ],
   declarations: [
     UpperCasePipe,
-    MapComponent
+    MapComponent,
+    ImageUploadComponent
   ],
   providers: [
     MapService,

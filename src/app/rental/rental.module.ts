@@ -9,6 +9,7 @@ import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from '../auth/service/auth.guard';
 import {RentalBookingComponent} from './components/rental-detail/rental-booking/rental-booking.component';
 import { RentalSearchComponent } from './components/rental-search/rental-search.component';
+import { RentalCreateComponent } from './components/rental-create/rental-create.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: '',
         component: RentalListComponent,
+      },
+      {
+        path: 'new',
+        component: RentalCreateComponent,
       },
       {
         path: ':city/homes',
@@ -44,7 +49,8 @@ const routes: Routes = [
     RentalListItemComponent,
     RentalDetailComponent,
     RentalBookingComponent,
-    RentalSearchComponent
+    RentalSearchComponent,
+    RentalCreateComponent
   ],
   exports: [
     RentalComponent
