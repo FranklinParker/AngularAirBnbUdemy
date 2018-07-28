@@ -8,6 +8,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from '../auth/service/auth.guard';
 import {RentalBookingComponent} from './components/rental-detail/rental-booking/rental-booking.component';
+import { RentalSearchComponent } from './components/rental-search/rental-search.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: '',
         component: RentalListComponent,
+      },
+      {
+        path: ':city/homes',
+        component: RentalSearchComponent,
       },
       {
         path: ':rentalId',
@@ -38,7 +43,8 @@ const routes: Routes = [
     RentalListComponent,
     RentalListItemComponent,
     RentalDetailComponent,
-    RentalBookingComponent
+    RentalBookingComponent,
+    RentalSearchComponent
   ],
   exports: [
     RentalComponent
