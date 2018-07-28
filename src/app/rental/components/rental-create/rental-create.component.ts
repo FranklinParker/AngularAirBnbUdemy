@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Rental} from '../../models/rental';
 import {RentalService} from '../../services/rental.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'bwm-rental-create',
@@ -12,7 +14,8 @@ export class RentalCreateComponent implements OnInit {
   rentalCategories = Rental.CATEGORIES;
   errors: any[] = [];
 
-  constructor(private rentalService: RentalService) {
+  constructor(private rentalService: RentalService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -27,13 +30,14 @@ export class RentalCreateComponent implements OnInit {
   }
 
   createRental() {
-    this.newRental.image ='https://www.pexels.com/photo/home-real-estate-106399/'
+    this.newRental.image =
+      '﻿https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg';
     this.rentalService.createRental(this.newRental)
-      .subscribe((rental) => {
-          console.log('rental created', rental);
+      .subscribe((rental:Rental) => {
+          this.router.navigate([`/rentals/${rental._id}`])
         },
-        (err) => {
-          console.log('error', err);
+        (err: HttpErrorResponse) => {
+          this.errors = err.error.errors;
 
         });
 

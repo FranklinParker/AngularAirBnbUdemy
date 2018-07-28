@@ -101,6 +101,7 @@
                    required>
           </div>
           <button (click)="createRental()"
+                  [disabled]="!rentalForm.form.valid"
                   type="button"
                   class="btn btn-bwm">Submit
           </button>

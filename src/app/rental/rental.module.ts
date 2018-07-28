@@ -23,6 +23,8 @@ const routes: Routes = [
       {
         path: 'new',
         component: RentalCreateComponent,
+        canActivate: [AuthGuard]
+
       },
       {
         path: ':city/homes',
