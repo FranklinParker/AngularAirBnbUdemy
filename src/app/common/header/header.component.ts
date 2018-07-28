@@ -19,4 +19,8 @@ export class HeaderComponent implements OnInit {
     this.auth.logout();
     this.router.navigate(['/login'])
   }
+  onSearch(){
+    this.searchCity? this.router.navigate([`/rentals/${this.searchCity}/homes`])
+      : this.router.navigate(['rentals']);
+  }
 }

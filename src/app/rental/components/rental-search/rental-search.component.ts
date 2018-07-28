@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {RentalService} from '../../services/rental.service';
 import {Rental} from '../../models/rental';
 import {ActivatedRoute} from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'bwm-rental-search',
@@ -18,6 +20,7 @@ export class RentalSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+   
     this.route.params.subscribe((params) => {
       this.city = params.city;
       this.getRentals();
@@ -26,14 +29,16 @@ export class RentalSearchComponent implements OnInit {
   }
 
   private getRentals(){
+    this.rentals = [];
+    this.errors = [];
     this.rentalService.getRentalsByCity(this.city)
       .subscribe(
         (rentals: Rental[]) => {
           this.rentals = rentals;
 
         },
-        (err) => {
-          this.errors = err.error.errors;
+        (errorResponse: HttpErrorResponse) => {
+          this.errors = errorResponse.error.errors;
         }
       );
 
