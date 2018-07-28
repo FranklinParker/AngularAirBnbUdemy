@@ -32,8 +32,7 @@ const routes: Routes = [
       },
       {
         path: ':rentalId',
-        component: RentalDetailComponent,
-        canActivate: [AuthGuard]
+        component: RentalDetailComponent
       }
     ]
   }
