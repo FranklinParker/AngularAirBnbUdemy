@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'bwm-manage-rental-booking',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageRentalBookingComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modalService: NgbModal) { }
 
   ngOnInit() {
   }
