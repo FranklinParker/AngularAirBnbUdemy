@@ -37,4 +37,8 @@ export class RentalService {
     return this.http.post(this.rentalUrl, rental);
   }
 
+  public deleteRental(rental: Rental): Observable<any>{
+    return this.http.delete(this.rentalUrl+ '/' + rental._id);
+  }
+
 }

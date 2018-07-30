@@ -9,6 +9,7 @@ import {Rental} from '../../../rental/models/rental';
 })
 export class ManageRentalComponent implements OnInit {
   rentals: Rental[];
+  rentalDeleteIndex: number;
   constructor(private rentalService: RentalService) { }
 
   ngOnInit() {
@@ -21,8 +22,20 @@ export class ManageRentalComponent implements OnInit {
 
   deleteRental(rental:Rental){
     console.log('delete', rental);
+    this.rentalDeleteIndex = undefined;
+    this.rentalService.deleteRental(rental)
+      .subscribe((result)=>{
+        this.removeRental(rental);
+      })
   }
 
+  private removeRental(rental: Rental){
+    const idx = this.rentals.findIndex((rent)=> rent._id=== rental._id);
+    if(idx!=-1){
+      this.rentals.splice(idx,1);
+
+    }
+  }
   activeBookings(rental:Rental): boolean{
     return rental.bookings.length>0;
   }
