@@ -11,6 +11,7 @@ import {RentalSearchComponent} from '../rental/components/rental-search/rental-s
 import {RouterModule, Routes} from '@angular/router';
 import { ManageComponent } from './components/manage/manage.component';
 import {SharedModule} from '../shared/shared.module';
+import { ManageRentalBookingComponent } from './components/manage-rental/manage-rental-booking/manage-rental-booking.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routes: Routes = [
   declarations: [
     ManageRentalComponent,
     ManageBookingComponent,
-    ManageComponent
+    ManageComponent,
+    ManageRentalBookingComponent
   ]
 })
 export class ManageModule { }
