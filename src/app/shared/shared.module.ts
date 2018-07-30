@@ -9,6 +9,7 @@ import {MapService} from './service/map.service';
 import {Daterangepicker} from 'ng2-daterangepicker';
 import {FormsModule} from '@angular/forms';
 import {ImageUploadComponent} from '../common/components/image-upload/image-upload.component';
+import { FormatDatePipe } from './pipes/format-date.pipe';
 
 @NgModule({
   imports: [
@@ -25,12 +26,14 @@ import {ImageUploadComponent} from '../common/components/image-upload/image-uplo
     MapComponent,
     Daterangepicker,
     FormsModule,
+    FormatDatePipe,
     ImageUploadComponent
   ],
   declarations: [
     UpperCasePipe,
     MapComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    FormatDatePipe
   ],
   providers: [
     MapService,

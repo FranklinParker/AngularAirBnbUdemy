@@ -10,6 +10,7 @@ import {AuthGuard} from '../auth/service/auth.guard';
 import {RentalSearchComponent} from '../rental/components/rental-search/rental-search.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ManageComponent } from './components/manage/manage.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   declarations: [
     ManageRentalComponent,

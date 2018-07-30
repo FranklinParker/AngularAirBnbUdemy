@@ -5,7 +5,7 @@ import {Booking} from '../../../bookings/booking.model';
 @Component({
   selector: 'bwm-manage-booking',
   templateUrl: './manage-booking.component.html',
-  styleUrls: ['./manage-booking.component.css']
+  styleUrls: ['./manage-booking.component.scss']
 })
 export class ManageBookingComponent implements OnInit {
   bookings: Booking[];
@@ -15,7 +15,6 @@ export class ManageBookingComponent implements OnInit {
     this.bookingService.getUserBookings()
       .subscribe((bookings:Booking[])=>{
         this.bookings = bookings;
-        console.log('bookings',bookings);
 
       })
   }
