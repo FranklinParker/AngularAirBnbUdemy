@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const rentalRoutes = require('./routes/rental');
 const userRoutes = require('./routes/user');
 const bookingRoutes = require('./routes/booking');
+const path = require('path');
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -33,6 +34,12 @@ app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 
+const appPath = path.join(__dirname, '../dist/AngularClient');
+app.use(express.static(appPath));
+
+app.get('*', function (req, res){
+  res.sendFile(path.resolve(appPath, 'index.html'));
+});
 
 
 const PORT = process.env.PORT || 3001;
