@@ -9,11 +9,12 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="bookings-inner-container"> <!-- Iterate bookings here -->
-      <p><span>Date:</span> 2018/04/05 - 2018/04/07 </p> <!-- startAt - endAt -->
-      <p><span>Guests:</span> 4</p> <!-- guests -->
-      <p><span>Total Price:</span> 280 $</p> <!-- totalPrice -->
-      <hr > <!-- optional: do not display after last element -->
+    <div class="bookings-inner-container"
+      *ngFor="let bookings of rental.bookings; let i = index"> <!-- Iterate bookings here -->
+      <p><span>Date:</span> {{bookings.startAt|formatDate}} - {{bookings.endAt|formatDate}} </p> <!-- startAt - endAt -->
+      <p><span>Guests:</span> {{bookings.guests}}</p> <!-- guests -->
+      <p><span>Total Price:</span> {{bookings.totalPrice|currency}}</p> <!-- totalPrice -->
+      <hr *ngIf="rental.bookings.length !=i+1" > <!-- optional: do not display after last element -->
     </div>
   </div>
   <div class="modal-footer">
