@@ -25,17 +25,12 @@ export class ManageRentalComponent implements OnInit {
     this.rentalDeleteIndex = undefined;
     this.rentalService.deleteRental(rental)
       .subscribe((result)=>{
-        this.removeRental(rental);
+        this.rentals.splice(this.rentalDeleteIndex,1);
+        this.rentalDeleteIndex = undefined;
       })
   }
 
-  private removeRental(rental: Rental){
-    const idx = this.rentals.findIndex((rent)=> rent._id=== rental._id);
-    if(idx!=-1){
-      this.rentals.splice(idx,1);
 
-    }
-  }
   activeBookings(rental:Rental): boolean{
     return rental.bookings.length>0;
   }
