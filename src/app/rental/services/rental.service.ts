@@ -29,9 +29,16 @@ export class RentalService {
     return this.http.get<Rental>(this.rentalUrl + '/' + rentalId);
   }
 
+  public getUserRentals(): Observable<Rental[]> {
+    return this.http.get<Rental[]>(this.rentalUrl + '/manage');
+  }
 
   public createRental(rental: Rental) : Observable<any>{
     return this.http.post(this.rentalUrl, rental);
+  }
+
+  public deleteRental(rental: Rental): Observable<any>{
+    return this.http.delete(this.rentalUrl+ '/' + rental._id);
   }
 
 }

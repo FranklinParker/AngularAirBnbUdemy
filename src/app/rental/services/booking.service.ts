@@ -16,7 +16,9 @@ export class BookingService {
 
   public createBooking(booking: Booking): Observable<Rental[]> {
     return this.http.post<any>(this.url, booking);
+  }
 
-
+  public getUserBookings(): Observable<Booking[]>{
+    return this.http.get<Booking[]>(this.url + '/manage');
   }
 }
