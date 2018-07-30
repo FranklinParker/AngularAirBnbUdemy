@@ -14,13 +14,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
+import {ManageModule} from './manage/manage.module';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/rentals',
     pathMatch: 'full'
-  }
+  },
+
 
 ];
 
@@ -38,7 +40,8 @@ const routes: Routes = [
     Daterangepicker,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ManageModule
   ],
   providers: [
     AuthGuard,
