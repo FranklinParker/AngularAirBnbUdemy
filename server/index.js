@@ -9,8 +9,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const {DB_URI} = require('./config');
-const fakeDbImp = require('./fake-db');
-const fakeDb = new fakeDbImp();
+const FakeDb = require('./fake-db');
 
 const promiseLib = global.Promise;
 mongoose.Promise = global.Promise;
@@ -20,7 +19,10 @@ const mongoDB = mongoose.connect(DB_URI, {
 
 mongoDB.then(async function (db) {
   console.log('Mongodb has been connected ');
-  //await fakeDb.seedDb();
+  if (process.env.NODE_ENV !== 'production') {
+    const fakeDb = new FakeDb();
+    // fakeDb.seedDb();
+  }
 }).catch(function (err) {
   console.log('Error while trying to connect with mongodb');
   throw err;
@@ -34,12 +36,14 @@ app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 
-const appPath = path.join(__dirname, '../dist/AngularClient');
-app.use(express.static(appPath));
+if (process.env.NODE_ENV === 'production') {
+  const appPath = path.join(__dirname, '../dist/AngularClient');
+  app.use(express.static(appPath));
 
-app.get('*', function (req, res){
-  res.sendFile(path.resolve(appPath, 'index.html'));
-});
+  app.get('*', function (req, res) {
+    res.sendFile(path.resolve(appPath, 'index.html'));
+  });
+}
 
 
 const PORT = process.env.PORT || 3001;
