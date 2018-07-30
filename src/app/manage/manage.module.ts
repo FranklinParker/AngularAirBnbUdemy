@@ -9,12 +9,13 @@ import {RentalComponent} from '../rental/rental.component';
 import {AuthGuard} from '../auth/service/auth.guard';
 import {RentalSearchComponent} from '../rental/components/rental-search/rental-search.component';
 import {RouterModule, Routes} from '@angular/router';
+import { ManageComponent } from './components/manage/manage.component';
 
 
 const routes: Routes = [
   {
     path: 'manage',
-    component: RentalComponent,
+    component: ManageComponent,
     children: [
       {
         path: 'rentals',
@@ -37,7 +38,8 @@ const routes: Routes = [
   ],
   declarations: [
     ManageRentalComponent,
-    ManageBookingComponent
+    ManageBookingComponent,
+    ManageComponent
   ]
 })
 export class ManageModule { }

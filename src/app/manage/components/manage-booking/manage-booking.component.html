@@ -1,3 +1,7 @@
-<p>
-  manage-booking works!
-</p>
+<div *ngIf="bookings">
+  <div class="row" *ngFor="let booking of bookings">
+    <div class="col">
+      {{booking.startAt}} - {{ booking.endAt}}
+    </div>
+  </div>
+</div>

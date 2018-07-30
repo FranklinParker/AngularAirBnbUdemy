@@ -1,3 +1,7 @@
-<p>
-  manage-rental works!
-</p>
+<div *ngIf="rentals">
+  <div class="row" *ngFor="let rental of rentals">
+    <div class="col">
+      {{rental.street}} - {{ rental.city}}
+    </div>
+  </div>
+</div>
