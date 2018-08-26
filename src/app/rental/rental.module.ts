@@ -11,6 +11,7 @@ import {RentalBookingComponent} from './components/rental-detail/rental-booking/
 import { RentalSearchComponent } from './components/rental-search/rental-search.component';
 import { RentalCreateComponent } from './components/rental-create/rental-create.component';
 import { RentalUpdateComponent } from './components/rental-update/rental-update.component';
+import {EditableModule} from '../common/components/editable/editable.module';
 
 const routes: Routes = [
   {
@@ -47,7 +48,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    EditableModule
   ],
   declarations: [
     RentalComponent,
