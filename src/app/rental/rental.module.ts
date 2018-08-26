@@ -32,6 +32,10 @@ const routes: Routes = [
         component: RentalSearchComponent,
       },
       {
+        path: ':rentalId/edit',
+        component: RentalUpdateComponent
+      },
+      {
         path: ':rentalId',
         component: RentalDetailComponent
       }
