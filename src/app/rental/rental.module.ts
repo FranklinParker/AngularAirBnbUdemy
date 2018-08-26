@@ -10,6 +10,7 @@ import {AuthGuard} from '../auth/service/auth.guard';
 import {RentalBookingComponent} from './components/rental-detail/rental-booking/rental-booking.component';
 import { RentalSearchComponent } from './components/rental-search/rental-search.component';
 import { RentalCreateComponent } from './components/rental-create/rental-create.component';
+import { RentalUpdateComponent } from './components/rental-update/rental-update.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,8 @@ const routes: Routes = [
     RentalDetailComponent,
     RentalBookingComponent,
     RentalSearchComponent,
-    RentalCreateComponent
+    RentalCreateComponent,
+    RentalUpdateComponent
   ],
   exports: [
     RentalComponent
