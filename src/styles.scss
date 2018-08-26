@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~src/assets/styles/variables";
+@import "~src/assets/styles/rental-detail";
+
 
 html, body, p {
   color: $main-text-color;
@@ -120,4 +122,8 @@ html, body, p {
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.inline{
+  display: inline-block;
 }

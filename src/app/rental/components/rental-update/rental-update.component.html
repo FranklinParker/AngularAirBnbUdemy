@@ -20,8 +20,11 @@
             <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
             <span>{{rental.user.username}}</span>
           </div>
-          <h1 class="rental-title">{{rental.title}}</h1>
-          <bwm-editable-input></bwm-editable-input>
+          <bwm-editable-input [(entity)]="rental"
+                              [className]="'rental-title'"
+                              [field]="'title'">
+
+          </bwm-editable-input>
           <h2 class="rental-city">{{rental.city | ucwords}}</h2>
           <div class="rental-room-info">
             <span><i class="fa fa-building"></i>{{rental.bedrooms}} bedrooms</span>
