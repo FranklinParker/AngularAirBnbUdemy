@@ -36,7 +36,15 @@
                               (entityUpdate)="updateRental(rental._id, $event)">
           </bwm-editable-input>
           <div class="rental-room-info">
-            <span><i class="fa fa-building"></i>{{rental.bedrooms}} bedrooms</span>
+            <span><i class="fa fa-building"></i>
+               <bwm-editable-input [(entity)]="rental"
+                                   [className]="'rental-bedrooms'"
+                                   [field]="'bedrooms'"
+                                   [style]="{ 'display': 'inline-block'}"
+                                   [type]="'number'"
+                                   (entityUpdate)="updateRental(rental._id, $event)">
+              </bwm-editable-input> bedrooms
+            </span>
             <span><i class="fa fa-user"></i> {{rental.bedrooms + 4}} guests</span>
             <span><i class="fa fa-bed"></i> {{rental.bedrooms + 2}} beds</span>
           </div>

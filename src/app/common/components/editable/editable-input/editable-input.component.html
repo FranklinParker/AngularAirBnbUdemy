@@ -1,7 +1,7 @@
-<div class="editable-component">
+<div  [ngStyle]="style" class="editable-component">
   <input *ngIf="isActiveInput"
          class="{{className}}"
-         type="text"
+         type="{{type}}"
          [(ngModel)]="entity[entityField]"
          [value]="entity[entityField]"
          (keyup.enter)="updateEntity()"
