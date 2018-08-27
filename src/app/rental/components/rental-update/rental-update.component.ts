@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RentalUpdateComponent implements OnInit {
   rental: Rental;
+  public rentalCategories = Rental.CATEGORIES;
 
   constructor(private route: ActivatedRoute,
               private rentalService: RentalService) {

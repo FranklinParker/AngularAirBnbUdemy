@@ -14,13 +14,23 @@
     <div class="row">
       <div class="col-md-8">
         <div class="rental">
-          <bwm-editable-select [(entity)]="rental"
-                              [className]="'rental-title'"
-                              [field]="'category'"
-                              [options]="['house','apartment','condo']"
-                              (entityUpdate)="updateRental(rental._id, $event)">
-          </bwm-editable-select>
-          <h2 class="rental-type {{rental.category}}">{{rental.shared?'Shared': 'Whole'}} {{rental.category}}</h2>
+          <h2 class="rental-type {{rental.category}}">
+            Shared
+            <bwm-editable-select [(entity)]="rental"
+                                 [className]="'rental-shared'"
+                                 [style]="{ 'display': 'inline-block'}"
+                                 [field]="'shared'"
+                                 [options]="[true,false]"
+                                 (entityUpdate)="updateRental(rental._id, $event)">
+            </bwm-editable-select>
+            <bwm-editable-select [(entity)]="rental"
+                                 [className]="'rental-category'"
+                                 [field]="'category'"
+                                 [options]="rentalCategories"
+                                 (entityUpdate)="updateRental(rental._id, $event)">
+            </bwm-editable-select>
+          </h2>
+
           <div class="rental-owner">
             <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
             <span>{{rental.user.username}}</span>
