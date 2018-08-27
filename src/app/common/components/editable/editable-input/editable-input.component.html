@@ -5,6 +5,7 @@
          [(ngModel)]="entity[entityField]"
          [value]="entity[entityField]"
          (keyup.enter)="updateEntity()"
+         (keydown.escape)="cancelUpdate()"
   >
   <span *ngIf="!isActiveInput" class="{{className}} inline">{{entity[entityField]}}</span>
   <div class="inline">
