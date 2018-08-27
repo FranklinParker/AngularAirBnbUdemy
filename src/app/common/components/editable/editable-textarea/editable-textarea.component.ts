@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {EditableComponent} from '../editable-component';
 
 @Component({
@@ -8,6 +8,8 @@ import {EditableComponent} from '../editable-component';
 })
 
 export class EditableTextareaComponent extends EditableComponent implements OnInit {
+  @Input() rows: string;
+  @Input() cols: string;
 
 
 }

@@ -1,3 +1,25 @@
-<p>
-  editable-textarea works!
-</p>
+<div [ngStyle]="style" class="editable-component">
+  <textarea *ngIf="isActiveInput"
+            class="{{className}}"
+            [(ngModel)]="entity[entityField]"
+            [value]="entity[entityField]"
+            [cols]="cols"
+            [rows]="rows"
+            (keyup.enter)="updateEntity()"
+  ></textarea>
+  <span *ngIf="!isActiveInput" class="{{className}} inline">{{entity[entityField]}}</span>
+  <div class="inline">
+    <button *ngIf="!isActiveInput"
+            class="btn btn-small btn-warning btn-editable"
+            (click)="isActiveInput=true">Edit
+    </button>
+    <button *ngIf="isActiveInput"
+            class="btn btn-small btn-primary btn-editable"
+            (click)="updateEntity()">Save
+    </button>
+    <button *ngIf="isActiveInput"
+            class="btn btn-small btn-danger btn-editable"
+            (click)="cancelUpdate()">Cancel
+    </button>
+  </div>
+</div>
