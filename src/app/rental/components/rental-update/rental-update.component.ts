@@ -31,4 +31,8 @@ export class RentalUpdateComponent implements OnInit {
       });
   }
 
+  titleChanged(newTitleValue:string){
+    console.log('newTitle', newTitleValue);
+  }
+
 }

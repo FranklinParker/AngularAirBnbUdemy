@@ -22,7 +22,8 @@
           </div>
           <bwm-editable-input [(entity)]="rental"
                               [className]="'rental-title'"
-                              [field]="'title'">
+                              [field]="'title'"
+                              (entityUpdate)="titleChanged($event)">
 
           </bwm-editable-input>
           <h2 class="rental-city">{{rental.city | ucwords}}</h2>

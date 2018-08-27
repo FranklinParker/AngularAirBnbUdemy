@@ -4,6 +4,7 @@
          type="text"
          [(ngModel)]="entity[field]"
          [value]="entity[field]"
+         (keyup.enter)="onEnterKey()"
   >
   <span *ngIf="!isActiveInput" class="{{className}} inline">{{entity[field]}}</span>
   <div class="inline">
