@@ -4,13 +4,16 @@
          type="text"
          [(ngModel)]="entity[field]"
          [value]="entity[field]"
-         (keyup.enter)="onEnterKey()"
+         (keyup.enter)="updateEntity()"
   >
   <span *ngIf="!isActiveInput" class="{{className}} inline">{{entity[field]}}</span>
   <div class="inline">
     <button *ngIf="!isActiveInput"
             class="btn btn-small btn-warning btn-editable"
             (click)="isActiveInput=true">Edit</button>
+    <button *ngIf="isActiveInput"
+            class="btn btn-small btn-primary btn-editable"
+            (click)="updateEntity()">Save</button>
     <button *ngIf="isActiveInput"
             class="btn btn-small btn-danger btn-editable"
             (click)="isActiveInput=false">Cancel</button>

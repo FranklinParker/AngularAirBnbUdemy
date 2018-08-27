@@ -23,10 +23,14 @@
           <bwm-editable-input [(entity)]="rental"
                               [className]="'rental-title'"
                               [field]="'title'"
-                              (entityUpdate)="titleChanged($event)">
+                              (entityUpdate)="updateRental(rental._id, $event)">
 
           </bwm-editable-input>
-          <h2 class="rental-city">{{rental.city | ucwords}}</h2>
+          <bwm-editable-input [(entity)]="rental"
+                              [className]="'rental-city'"
+                              [field]="'city'"
+                              (entityUpdate)="updateRental(rental._id, $event)">
+          </bwm-editable-input>
           <div class="rental-room-info">
             <span><i class="fa fa-building"></i>{{rental.bedrooms}} bedrooms</span>
             <span><i class="fa fa-user"></i> {{rental.bedrooms + 4}} guests</span>

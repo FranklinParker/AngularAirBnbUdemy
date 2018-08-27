@@ -20,6 +20,7 @@ export class RentalUpdateComponent implements OnInit {
       const rentalId = params['rentalId'];
       this.getRental(rentalId);
 
+
     });
   }
 
@@ -31,8 +32,15 @@ export class RentalUpdateComponent implements OnInit {
       });
   }
 
-  titleChanged(newTitleValue:string){
-    console.log('newTitle', newTitleValue);
+
+   updateRental(rentalId, updateData: any){
+    console.log('rentalID', rentalId);
+    console.log('updateData', updateData);
+    this.rentalService.updateRental(this.rental._id,updateData)
+      .subscribe((data)=>{
+      },(err)=>{
+        console.log('err update', err);
+      })
   }
 
 }

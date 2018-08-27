@@ -20,7 +20,7 @@ export class RentalService {
   }
 
 
-  public getRentalsByCity(city: string){
+  public getRentalsByCity(city: string) {
     const url = this.rentalUrl + '?city=' + city;
     return this.http.get<Rental[]>(url);
   }
@@ -33,12 +33,18 @@ export class RentalService {
     return this.http.get<Rental[]>(this.rentalUrl + '/manage');
   }
 
-  public createRental(rental: Rental) : Observable<any>{
+  public createRental(rental: Rental): Observable<any> {
     return this.http.post(this.rentalUrl, rental);
   }
 
-  public deleteRental(rental: Rental): Observable<any>{
-    return this.http.delete(this.rentalUrl+ '/' + rental._id);
+  public deleteRental(rental: Rental): Observable<any> {
+    return this.http.delete(this.rentalUrl + '/' + rental._id);
   }
+
+  public updateRental(rentalId:string, rental: any) {
+    return this.http.patch(this.rentalUrl + '/' + rentalId,
+      rental);
+  }
+
 
 }

@@ -10,15 +10,16 @@ export class EditableInputComponent implements OnInit {
   @Input() entity: any;
   @Input() field: string;
   @Input() className:string;
-  @Output() entityUpdate= new EventEmitter<string>();
+  @Output() entityUpdate= new EventEmitter<any>();
   isActiveInput: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
-  onEnterKey(){
-    this.entityUpdate.emit( this.entity[this.field])
+  updateEntity(){
+    this.entityUpdate.emit({[this.field]:this.entity[this.field]});
+    this.isActiveInput = false;
 
   }
 
