@@ -8,5 +8,6 @@ import {EditableComponent} from '../editable-component';
 })
 export class EditableInputComponent extends EditableComponent implements OnInit {
 
+  @Input() type:string = 'text'
 
 }

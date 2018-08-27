@@ -7,7 +7,6 @@ export class EditableComponent implements OnInit {
     this.setOriginValue();
   };
   @Input() className:string;
-  @Input() type:string = 'text'
   @Input() style:any;
   @Output() entityUpdate= new EventEmitter<any>();
   isActiveInput: boolean = false;
