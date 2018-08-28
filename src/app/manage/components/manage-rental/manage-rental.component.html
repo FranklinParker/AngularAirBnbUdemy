@@ -13,6 +13,8 @@
           </div>
           <div class="card-footer text-muted">
             <p>Created at {{rental.createdAt| formatDate}}</p>
+            <a class="btn btn-bwm" routerLink="/rentals/{{rental._id}}/edit">Edit Rental</a>
+
             <button type="button" (click)="rentalDeleteIndex=i"
                     *ngIf="rentalDeleteIndex !=i "
                     [disabled]="activeBookings(rental)"
