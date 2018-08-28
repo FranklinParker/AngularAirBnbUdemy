@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
+import {UcWordsPipe} from 'ngx-pipes';
 
 @Component({
   selector: 'bwm-rental-update',
@@ -18,7 +19,9 @@ export class RentalUpdateComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private rentalService: RentalService,
-              private toastrServ: ToastrService) {
+              private toastrServ: ToastrService,
+              private ucWordsPipe: UcWordsPipe) {
+    this.transformLocation = this.transformLocation.bind(this);
   }
 
   ngOnInit() {
@@ -27,6 +30,11 @@ export class RentalUpdateComponent implements OnInit {
       this.getRental(rentalId);
 
     });
+  }
+
+  public transformLocation(location: string) : string{
+
+    return this.ucWordsPipe.transform(location);
   }
 
   updateRental(rentalId, updateData: any) {
@@ -53,4 +61,7 @@ export class RentalUpdateComponent implements OnInit {
       });
   }
 
+  countBedroomAssets(assetNum: number){
+    return parseInt(<any>this.rental.bedrooms,10) + assetNum;
+  }
 }

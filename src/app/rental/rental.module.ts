@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {NgPipesModule, UcWordsPipe} from 'ngx-pipes';
 import {CommonModule} from '@angular/common';
 import {RentalComponent} from './rental.component';
 import {RentalListComponent} from './components/rental-list/rental-list.component';
@@ -64,6 +65,9 @@ const routes: Routes = [
   exports: [
     RentalComponent
   ],
+  providers: [
+    UcWordsPipe
+  ]
 
 
 })

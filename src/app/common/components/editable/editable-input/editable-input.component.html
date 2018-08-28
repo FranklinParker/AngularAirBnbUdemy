@@ -7,7 +7,7 @@
          (keyup.enter)="updateEntity()"
          (keydown.escape)="cancelUpdate()"
   >
-  <span *ngIf="!isActiveInput" class="{{className}} inline">{{entity[entityField]}}</span>
+  <span *ngIf="!isActiveInput" class="{{className}} inline">{{transformView(entity[entityField])}}</span>
   <div class="inline">
     <button *ngIf="!isActiveInput"
             class="btn btn-small btn-warning btn-editable"
