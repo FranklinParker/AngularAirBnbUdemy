@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'bwm-rental-create',
   templateUrl: './rental-create.component.html',
-  styleUrls: ['./rental-create.component.css']
+  styleUrls: ['./rental-create.component.scss']
 })
 export class RentalCreateComponent implements OnInit {
   newRental: Rental = new Rental();
