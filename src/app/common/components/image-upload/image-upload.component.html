@@ -2,4 +2,6 @@
   #imageInput
   type="file"
   accept="*/image"
-  (change)="processFile(imageInput.value)">
+  (change)="processFile(imageInput.files[0])">
+
+<img *ngIf="seletedFile" [src]="seletedFile.src">
