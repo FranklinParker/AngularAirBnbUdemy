@@ -30,8 +30,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    ImageUploadComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
