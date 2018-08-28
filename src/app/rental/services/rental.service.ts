@@ -46,5 +46,10 @@ export class RentalService {
       rental);
   }
 
+  public verifyUserRental(rentalId: string): Observable<Rental> {
+    return this.http.get<Rental>(this.rentalUrl + '/' + rentalId+'/verify-user');
+  }
+
+
 
 }

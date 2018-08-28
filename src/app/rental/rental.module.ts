@@ -13,6 +13,7 @@ import { RentalSearchComponent } from './components/rental-search/rental-search.
 import { RentalCreateComponent } from './components/rental-create/rental-create.component';
 import { RentalUpdateComponent } from './components/rental-update/rental-update.component';
 import {EditableModule} from '../common/components/editable/editable.module';
+import {RentalGuard} from './services/rental.guard';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
       },
       {
         path: ':rentalId/edit',
-        component: RentalUpdateComponent
+        component: RentalUpdateComponent,
+        canActivate: [AuthGuard, RentalGuard]
       },
       {
         path: ':rentalId',
@@ -66,7 +68,8 @@ const routes: Routes = [
     RentalComponent
   ],
   providers: [
-    UcWordsPipe
+    UcWordsPipe,
+    RentalGuard
   ]
 
 

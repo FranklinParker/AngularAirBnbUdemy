@@ -62,6 +62,6 @@ export class RentalUpdateComponent implements OnInit {
   }
 
   countBedroomAssets(assetNum: number){
-    return parseInt(<any>this.rental.bedrooms,10) + assetNum;
+    return parseInt(<any>this.rental.bedrooms || 0,10) + assetNum;
   }
 }
