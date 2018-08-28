@@ -25,6 +25,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.locationSubject) {
       this.locationSubject.subscribe((location: string) => {
+        console.log('got new location', location);
         this.getLocation(location);
       });
     }

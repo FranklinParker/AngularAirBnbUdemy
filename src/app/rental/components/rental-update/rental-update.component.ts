@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RentalService} from '../../services/rental.service';
 import {Rental} from '../../models/rental';
 import {ActivatedRoute} from '@angular/router';
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'bwm-rental-update',
@@ -10,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RentalUpdateComponent implements OnInit {
   rental: Rental;
+  locationSubject: Subject<any> = new Subject();
   public rentalCategories = Rental.CATEGORIES;
 
   constructor(private route: ActivatedRoute,
@@ -20,7 +22,6 @@ export class RentalUpdateComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const rentalId = params['rentalId'];
       this.getRental(rentalId);
-
 
     });
   }
@@ -38,7 +39,11 @@ export class RentalUpdateComponent implements OnInit {
     console.log('rentalID', rentalId);
     console.log('updateData', updateData);
     this.rentalService.updateRental(this.rental._id,updateData)
-      .subscribe((data)=>{
+      .subscribe((updatedRental: Rental)=>{
+        this.rental = updatedRental;
+        if(updateData.city || updateData.street){
+          this.locationSubject.next(this.rental.city + ', ' + this.rental.street);
+        }
       },(err)=>{
         console.log('err update', err);
       })
