@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ImageUploadService} from '../../service/image-upload.service';
 
 class FileSnippet {
+  pending: boolean = false;
+  status: string = 'INIT'
   constructor(public src:string, public file:File){
 
   }
@@ -21,18 +23,25 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onSuccess(imageUrl){
-    alert('file uploaded:' + imageUrl);
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'OK';
+    this.imageUploaded.emit(imageUrl);
   }
 
   onFailure(err){
-    alert('file upload fail:' + err);
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'FAIL';
+    this.selectedFile.src ='';
+    this.imageError.emit('');
   }
+
   processFile(file: File){
 
     const reader = new FileReader();
 
     reader.addEventListener('load', (event:any)=>{
       this.selectedFile = new FileSnippet(event.target.result, file);
+      this.selectedFile.pending = true;
       this.imageUploadService.uploadImage(this.selectedFile.file)
         .subscribe((imageUrl)=>{
           console.log('imageUrl', imageUrl);
