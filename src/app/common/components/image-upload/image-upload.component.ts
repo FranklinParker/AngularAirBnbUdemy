@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ImageUploadService} from '../../service/image-upload.service';
+import {ToastrService} from 'ngx-toastr';
 
 class FileSnippet {
   static readonly IMAGE_SIZE = {width: 950, height: 720};
@@ -25,7 +26,9 @@ export class ImageUploadComponent implements OnInit {
   imageChangedEvent: any;
 
 
-  constructor(private imageUploadService: ImageUploadService) {
+  constructor(private imageUploadService: ImageUploadService,
+              private toastr: ToastrService,
+  ) {
   }
 
   ngOnInit() {
@@ -34,6 +37,7 @@ export class ImageUploadComponent implements OnInit {
   onSuccess(imageUrl) {
     this.selectedFile.pending = false;
     this.selectedFile.status = 'OK';
+    this.imageChangedEvent = null;
     this.imageUploaded.emit(imageUrl);
   }
 
@@ -41,6 +45,8 @@ export class ImageUploadComponent implements OnInit {
     this.selectedFile.pending = false;
     this.selectedFile.status = 'FAIL';
     this.selectedFile.src = '';
+    this.imageChangedEvent = null;
+
     this.imageError.emit('');
   }
 
@@ -67,13 +73,13 @@ export class ImageUploadComponent implements OnInit {
         if (this.width > FileSnippet.IMAGE_SIZE.width && this.height > FileSnippet.IMAGE_SIZE.height) {
           self.imageChangedEvent = event;
         } else {
-         // self.toastr.error(`Minimum width is ${FileSnippet.IMAGE_SIZE.width} and minimum heigth is ${FileSnippet.IMAGE_SIZE.height}`, 'Error!');
+          self.toastr.error(`Minimum width is ${FileSnippet.IMAGE_SIZE.width} and minimum heigth is ${FileSnippet.IMAGE_SIZE.height}`, 'Error!');
         }
       }
 
       img.src = URL.createObjectURL(file);
     } else {
-      //this.toastr.error('Unsupported File Type. Only jpeg and png is allowed!', 'Error!');
+      this.toastr.error('Unsupported File Type. Only jpeg and png is allowed!', 'Error!');
     }
 
   }
@@ -84,7 +90,9 @@ export class ImageUploadComponent implements OnInit {
       const reader = new FileReader();
 
       reader.addEventListener('load', (event: any) => {
+        this.selectedFile.src = event.target.result;
         this.selectedFile.pending = true;
+
         this.imageUploadService.uploadImage(this.selectedFile.file)
           .subscribe((imageUrl) => {
             console.log('imageUrl', imageUrl);
