@@ -1,7 +1,17 @@
-<input
-  #imageInput
-  type="file"
-  accept="*/image"
-  (change)="processFile(imageInput.files[0])">
+<label class='image-upload-container btn btn-bwm'>
+  <span>Select Image</span>
+  <input
+    #imageInput
+    type="file"
+    accept="*/image"
+    (change)="processFile(imageInput.files[0])">
 
-<img *ngIf="seletedFile" [src]="seletedFile.src">
+  <img *ngIf="seletedFile" [src]="seletedFile.src">
+</label>
+
+<div *ngIf="selectedFile && selectedFile.src"
+     class='img-preview-container'>
+  <div class='img-preview'
+       [ngStyle]="{'background-image': 'url(' + selectedFile.src + ')'}">
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ImageUploadService} from '../../service/image-upload.service';
 
 class FileSnippet {
   constructor(public src:string, public file:File){
@@ -13,18 +14,34 @@ class FileSnippet {
 export class ImageUploadComponent implements OnInit {
   @Output() imageUploaded = new EventEmitter<any>();
   @Output() imageError = new EventEmitter();
-  seletedFile: FileSnippet;
-  constructor() { }
+  selectedFile: FileSnippet;
+  constructor(private imageUploadService: ImageUploadService) { }
 
   ngOnInit() {
+  }
+
+  onSuccess(imageUrl){
+    alert('file uploaded:' + imageUrl);
+  }
+
+  onFailure(err){
+    alert('file upload fail:' + err);
   }
   processFile(file: File){
 
     const reader = new FileReader();
 
     reader.addEventListener('load', (event:any)=>{
-      this.seletedFile = new FileSnippet(event.target.result, file);
-      console.log(this.seletedFile);
+      this.selectedFile = new FileSnippet(event.target.result, file);
+      this.imageUploadService.uploadImage(this.selectedFile.file)
+        .subscribe((imageUrl)=>{
+          console.log('imageUrl', imageUrl);
+          this.onSuccess(imageUrl);
+        },(err)=>{
+          console.log('err', err);
+          this.onFailure(err);
+        })
+
 
     });
 
