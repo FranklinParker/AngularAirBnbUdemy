@@ -21,4 +21,6 @@ export class EditableImageComponent extends EditableComponent {
   handleImageLoad() {
     this.isActiveInput = true;
   }
+
+
 }

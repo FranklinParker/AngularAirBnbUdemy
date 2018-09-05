@@ -30,6 +30,7 @@ export class EditableComponent implements OnInit, OnChanges {
     this.isActiveInput = false;
   }
   cancelUpdate(){
+    console.log('update cancelled');
     this.isActiveInput = false;
     this.entity[this.entityField] = this.originalValue;
   }

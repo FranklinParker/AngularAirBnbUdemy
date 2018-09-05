@@ -21,7 +21,13 @@ class FileSnippet {
 export class ImageUploadComponent implements OnInit {
 
   @Output() imageUploaded = new EventEmitter<any>();
+  @Output() imageLoadedToContainer = new EventEmitter<any>();
   @Output() imageError = new EventEmitter();
+  @Output() croppingCancelled = new EventEmitter();
+
+
+
+
   selectedFile: FileSnippet;
   imageChangedEvent: any;
 
@@ -57,6 +63,13 @@ export class ImageUploadComponent implements OnInit {
     return this.selectedFile = new FileSnippet('', file);
   }
 
+  imageLoaded(){
+    this.imageLoadedToContainer.emit();
+  }
+  cancelCropping(){
+    this.imageChangedEvent = null;
+    this.croppingCancelled.emit();
+  }
   processFile(event: any) {
 
     this.selectedFile = undefined;
