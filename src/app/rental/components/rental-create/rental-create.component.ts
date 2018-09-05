@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'bwm-rental-create',
   templateUrl: './rental-create.component.html',
-  styleUrls: ['./rental-create.component.css']
+  styleUrls: ['./rental-create.component.scss']
 })
 export class RentalCreateComponent implements OnInit {
   newRental: Rental = new Rental();
@@ -21,17 +21,18 @@ export class RentalCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleImageUpload(event: any) {
-
+  handleImageUpload(imageUrl: string) {
+    this.newRental.image = imageUrl;
   }
 
   handleImageError() {
+    this.newRental.image = '';
 
   }
 
   createRental() {
-    this.newRental.image =
-      '﻿https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg';
+    //this.newRental.image =
+     // '﻿https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg';
     this.rentalService.createRental(this.newRental)
       .subscribe((rental:Rental) => {
           this.router.navigate([`/rentals/${rental._id}`])

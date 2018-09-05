@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const rentalRoutes = require('./routes/rental');
 const userRoutes = require('./routes/user');
 const bookingRoutes = require('./routes/booking');
+const imageUploadRoutes = require('./routes/image-upload');
 const path = require('path');
 
 const cors = require('cors');
@@ -35,6 +36,8 @@ app.use(bodyParser.json());
 app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+app.use('/api/v1', imageUploadRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
   const appPath = path.join(__dirname, '../dist/AngularClient');

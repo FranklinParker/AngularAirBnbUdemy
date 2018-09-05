@@ -15,6 +15,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {ManageModule} from './manage/manage.module';
+import {ImageUploadComponent} from './common/components/image-upload/image-upload.component';
 
 const routes: Routes = [
   {

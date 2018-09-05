@@ -100,7 +100,7 @@
                    [(ngModel)]="newRental.shared">
           </div>
           <button (click)="createRental()"
-                  [disabled]="!rentalForm.form.valid"
+                  [disabled]="!rentalForm.form.valid || !newRental.image"
                   type="button"
                   class="btn btn-bwm">Submit
           </button>
